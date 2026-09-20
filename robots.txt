@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://us-pixel-art-studio.enjoy-onepage.com/sitemap.xml
