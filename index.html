@@ -1,28 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Retro Pixel Art Studio - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>Retro Pixel Art Studio</title>
+<meta name="description" content="Create retro 8-bit pixel art with customizable canvas sizes and PNG export.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-pixel-art-studio.enjoy-onepage.com/">
+<meta name="theme-color" content="#db2777">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Retro Pixel Art Studio">
+<meta property="og:title" content="Retro Pixel Art Studio">
+<meta property="og:description" content="Create retro 8-bit pixel art with customizable canvas sizes and PNG export.">
+<meta property="og:url" content="https://us-pixel-art-studio.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-pixel-art-studio.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Retro Pixel Art Studio">
+<meta name="twitter:description" content="Create retro 8-bit pixel art with customizable canvas sizes and PNG export.">
+<meta name="twitter:image" content="https://us-pixel-art-studio.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="Pixel Art RSS" href="https://us-pixel-art-studio.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-pixel-art-studio.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-pixel-art-studio.enjoy-onepage.com/#webapp",
+      "name": "Retro Pixel Art Studio",
+      "url": "https://us-pixel-art-studio.enjoy-onepage.com/",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "An interactive retro 8-bit pixel art creator with 16-color palettes, flood-fill tools, multi-level undo, and crisp high-resolution PNG export.",
+      "image": "https://us-pixel-art-studio.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-pixel-art-studio.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does crisp PNG export prevent blurriness?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When exporting to higher resolutions (8x, 16x, 32x), our engine scales pixels using nearest-neighbor interpolation without bilinear smoothing, preserving sharp retro pixel edges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which grid canvas dimensions are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can select between 16×16, 24×24, and 32×32 pixel canvas resolutions suitable for retro sprites, favicons, game icons, and digital badges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I fill entire regions with the bucket tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Selecting the Bucket tool triggers an 8-bit flood-fill algorithm that recolors all contiguous matching pixels with your active palette color."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my pixel drawings uploaded or stored online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. All canvas rendering, color processing, and image exports execute directly in your web browser. Zero graphics or artwork files are uploaded to any server."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<!-- ADSENSE START: loader -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2228289204702106" crossorigin="anonymous"></script>
+<!-- ADSENSE END: loader -->
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+:root{--bg:#fdf2f8;--card:#fff;--ink:#0f172a;--muted:#475569;--accent:#db2777;--accent-hover:#be185d;--line:#fce7f3}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-wrap:anywhere}
+.header{background:linear-gradient(135deg,#9d174d,#db2777);color:#fff;text-align:center;padding:26px 16px 22px}
+.header h1{margin:0;font-size:1.7rem}
+.header-sub{opacity:.92;margin-top:6px;font-size:.95rem}
+.wrap{max-width:1100px;margin:0 auto;padding:12px 14px 8px}
+.grid2{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:1024px){.grid2{grid-template-columns:7fr 5fr;align-items:start}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin:14px 0}
+.grid2 .card{margin:0}
+.card h2{font-size:1.15rem;margin:4px 0 10px}
+.lbl{display:block;font-weight:600;margin:8px 0 4px;font-size:.92rem}
+input[type=text],select{width:100%;font:inherit;font-size:1rem;padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>div{flex:1 1 120px;min-width:0}
+.btn{font:inherit;border:1px solid #cbd5e1;background:#fff;color:var(--ink);border-radius:10px;padding:8px 13px;cursor:pointer;transition:background .15s}
+.btn:hover{background:#f8fafc}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
+.btn.primary:hover{background:var(--accent-hover)}
+.btn.sm{padding:4px 10px;font-size:.86rem;border-radius:8px}
+.btn.active-tool{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+/* Canvas Area */
+.canvas-wrapper{display:flex;justify-content:center;align-items:center;background:#1e293b;border-radius:14px;padding:14px;margin:12px 0;overflow:hidden}
+canvas#pixelCanvas{background:#ffffff;box-shadow:0 8px 24px rgba(0,0,0,.25);cursor:crosshair;image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none}
+
+/* Palette Swatches */
+.palette-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:8px 0}
+.swatch{width:100%;aspect-ratio:1;border-radius:6px;border:2px solid transparent;cursor:pointer;transition:transform .1s}
+.swatch:hover{transform:scale(1.15)}
+.swatch.selected{border-color:#0f172a;box-shadow:0 0 0 2px #fff}
+
+.preset-chip{display:inline-block;padding:4px 8px;background:#fce7f3;color:#9d174d;border-radius:6px;font-size:.8rem;cursor:pointer;margin:2px;font-weight:600}
+.preset-chip:hover{background:#fbcfe8}
+
+.hint{font-size:.86rem;color:var(--muted);margin:6px 0}
+.notice{border-color:#fcd34d;background:#fffbeb}
+.faq-item h3{font-size:1rem;margin:12px 0 4px}
+.faq-item p{margin:0;color:#334155}
+.src{font-size:.82rem;color:var(--muted)}
+.ad-box{max-width:1100px;margin:10px auto;padding:0 14px;background:transparent;overflow:hidden;text-align:center}
+.ad-top ins{max-height:90px}
+.footer{text-align:center;font-size:.85rem;color:var(--muted);padding:18px 14px 28px}
+.footer a{color:var(--muted);text-decoration:none}
+.footer a:hover{text-decoration:underline}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:90vw}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
+<header class="header">
   <h1>Retro Pixel Art Studio</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
+  <div class="header-sub">8-Bit Raster Canvas · Flood Fill &amp; Palettes · High-DPI Crisp PNG Export</div>
+</header>
+
+<!-- ADSENSE START: top -->
+<div class="ad-box ad-top">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3824727725" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: top -->
+
+<main class="wrap">
+  <div class="grid2">
+    <!-- Pixel Canvas Card -->
+    <section class="card" aria-labelledby="canvas-h">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <h2 id="canvas-h" style="margin:0">🎨 Interactive Pixel Canvas</h2>
+        <div id="canvasDimLabel" style="font-weight:700;color:var(--accent)">16 × 16 Pixels</div>
+      </div>
+
+      <!-- Tools Toolbar -->
+      <div class="actions" style="margin-bottom:8px">
+        <button type="button" id="toolPen" class="btn sm active-tool">✏️ Pen</button>
+        <button type="button" id="toolEraser" class="btn sm">🧹 Eraser</button>
+        <button type="button" id="toolFill" class="btn sm">🪣 Bucket Fill</button>
+        <button type="button" id="toolEye" class="btn sm">💧 Eyedropper</button>
+        <button type="button" id="btnToggleGrid" class="btn sm">▦ Toggle Grid</button>
+        <button type="button" id="btnUndo" class="btn sm">↩ Undo</button>
+        <button type="button" id="btnClear" class="btn sm">Clear</button>
+      </div>
+
+      <!-- Canvas Viewport -->
+      <div class="canvas-wrapper">
+        <canvas id="pixelCanvas" width="384" height="384" aria-label="Pixel art canvas"></canvas>
+      </div>
+
+      <label class="lbl">Sample Templates</label>
+      <div>
+        <span class="preset-chip" id="tmplHeart">❤️ Retro Heart</span>
+        <span class="preset-chip" id="tmplMushroom">🍄 Power Mushroom</span>
+        <span class="preset-chip" id="tmplInvader">👾 Space Invader</span>
+        <span class="preset-chip" id="tmplSword">🗡️ Pixel Sword</span>
+      </div>
+      <p class="hint">Click or drag across pixels to paint. Right-click or use Eraser to clear pixels.</p>
+    </section>
+
+    <!-- Palette & Export Card -->
+    <section class="card" aria-labelledby="palette-h">
+      <h2 id="palette-h">🎛️ Palette &amp; Export</h2>
+
+      <label class="lbl">Classic 16-Color Retro Palette</label>
+      <div id="paletteGrid" class="palette-grid">
+        <!-- 16 swatches generated dynamically -->
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div style="flex:1 1 80px">
+          <label class="lbl" for="customColorPicker">Custom Color</label>
+          <input type="color" id="customColorPicker" value="#db2777" style="width:100%;height:38px;padding:2px;cursor:pointer;border-radius:8px">
+        </div>
+        <div style="flex:2 1 140px">
+          <label class="lbl" for="selGridSize">Canvas Resolution</label>
+          <select id="selGridSize">
+            <option value="16" selected>16 × 16 (Icon / Favicon)</option>
+            <option value="24">24 × 24 (Retro Sprite)</option>
+            <option value="32">32 × 32 (Detailed Character)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--line);margin:14px 0 10px;padding-top:10px">
+        <label class="lbl" for="selExportScale">Export Scale Factor</label>
+        <select id="selExportScale">
+          <option value="1">1× Original (16px to 32px)</option>
+          <option value="8">8× Scaled (128px to 256px)</option>
+          <option value="16" selected>16× Crisp Standard (256px to 512px)</option>
+          <option value="32">32× High Resolution (512px to 1024px)</option>
+        </select>
+      </div>
+
+      <div class="actions" style="margin-top:14px">
+        <button type="button" id="btnDownloadPng" class="btn primary" style="width:100%">💾 Download Crisp PNG</button>
+      </div>
+      <div class="actions" style="margin-top:8px">
+        <button type="button" id="btnExportJson" class="btn sm">⬇ Save Project JSON</button>
+        <button type="button" id="btnShareApp" class="btn sm">🔗 Share Studio</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ADSENSE START: mid -->
+  <div class="ad-box ad-mid">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="1186914926" data-ad-format="rectangle" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <!-- Educational Guide -->
+  <section class="card" aria-labelledby="guide-h">
+    <h2 id="guide-h">📖 Digital Art History: 8-Bit Pixel Aesthetics</h2>
+    <p>Pixel art originated from the strict technical hardware limitations of early third-generation arcade cabinets and home video game consoles (e.g. Nintendo Famicom/NES, Game Boy, Sega Master System):</p>
+    <ul>
+      <li><strong>Indexed Color Palettes:</strong> Classic video hardware constrained display hardware to 16 or 32 simultaneous colors indexed from master palettes. Artists conveyed depth and material texture using hand-placed optical shading.</li>
+      <li><strong>Ordered Dithering:</strong> By checkerboarding two distinct color pixels adjacent to one another, artists produced the optical illusion of third blended colors without hardware blending support.</li>
+      <li><strong>Nearest-Neighbor Upscaling:</strong> Unlike digital photography which relies on bilinear or bicubic filtering, pixel art relies on integer scaling algorithms to preserve hard, sharp square pixel boundaries.</li>
+    </ul>
+    <p class="src">Design references: Silber D. (2015) <em>Pixel Logic: A Guide to Pixel Art</em>; Carlson W. (2003) <em>Computer Graphics and Video Games History</em>.</p>
+  </section>
+
+  <section class="card" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">❓ Frequently Asked Questions</h2>
+    <div class="faq-item"><h3>How does crisp PNG export prevent blurriness?</h3><p>When exporting to higher resolutions (8x, 16x, 32x), our engine scales pixels using nearest-neighbor interpolation without bilinear smoothing, preserving sharp retro pixel edges.</p></div>
+    <div class="faq-item"><h3>Which grid canvas dimensions are supported?</h3><p>You can select between 16×16, 24×24, and 32×32 pixel canvas resolutions suitable for retro sprites, favicons, game icons, and digital badges.</p></div>
+    <div class="faq-item"><h3>Can I fill entire regions with the bucket tool?</h3><p>Yes. Selecting the Bucket tool triggers an 8-bit flood-fill algorithm that recolors all contiguous matching pixels with your active palette color.</p></div>
+    <div class="faq-item"><h3>Are my pixel drawings uploaded or stored online?</h3><p>No. All canvas rendering, color processing, and image exports execute directly in your web browser. Zero graphics or artwork files are uploaded to any server.</p></div>
+  </section>
+
+  <section class="card notice" aria-labelledby="note-h">
+    <h2 id="note-h">⚠️ Commercial Use Notice</h2>
+    <p>All pixel art drawings and PNG assets created with this studio are 100% royalty-free. You retain full intellectual property ownership of your exported sprites for personal, commercial, or game development use.</p>
+  </section>
 </main>
+
+<!-- ADSENSE START: bottom -->
+<div class="ad-box ad-bottom">
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2228289204702106" data-ad-slot="3416334507" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+<!-- ADSENSE END: bottom -->
+
+<footer class="footer">
+  <p>Free Retro Pixel Art Studio · 100% private and client-side.</p>
+  <p><a href="/disclaimer.html">Disclaimer</a> | <a href="/privacy.html">Privacy Policy</a> | <a href="/terms.html">Terms of Service</a></p>
+</footer>
+
+<div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- LOGIC START -->
+<script>
+(function () {
+  'use strict';
+  var SITE = 'https://us-pixel-art-studio.enjoy-onepage.com';
+  var TOOL_NAME = 'Retro Pixel Art Studio';
+  var STORAGE_KEY = 'us_pixel_art_canvas';
+
+  var RETRO_PALETTE = [
+    '#000000', '#1d2b53', '#7e2553', '#008751', '#ab5236', '#5f574f', '#c2c3c7', '#fff1e8',
+    '#ff004d', '#ffa300', '#ffec27', '#00e436', '#29adff', '#83769c', '#ff77a8', '#ffffff'
+  ];
+
+  var gridSize = 16;
+  var currentColor = '#ff004d';
+  var currentTool = 'pen'; // 'pen', 'eraser', 'fill', 'eye'
+  var showGrid = true;
+  var isDrawing = false;
+
+  var grid = [];
+  var undoStack = [];
+
+  function $(id) { return document.getElementById(id); }
+
+  function showToast(msg) {
+    var toast = $('global-ux-toast');
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toast._tid);
+    toast._tid = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  }
+
+  function initGrid(size) {
+    gridSize = size;
+    $('canvasDimLabel').textContent = size + ' × ' + size + ' Pixels';
+    grid = [];
+    for (var r = 0; r < size; r++) {
+      var row = [];
+      for (var c = 0; c < size; c++) {
+        row.push(null);
+      }
+      grid.push(row);
+    }
+    undoStack = [];
+    renderCanvas();
+  }
+
+  function pushUndo() {
+    undoStack.push(JSON.stringify(grid));
+    if (undoStack.length > 25) undoStack.shift();
+  }
+
+  function renderCanvas() {
+    var canvas = $('pixelCanvas');
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width;
+    var h = canvas.height;
+    var cellSize = w / gridSize;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Checkerboard background for transparency
+    for (var r = 0; r < gridSize; r++) {
+      for (var c = 0; c < gridSize; c++) {
+        ctx.fillStyle = ((r + c) % 2 === 0) ? '#ffffff' : '#f1f5f9';
+        ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+
+        var col = grid[r][c];
+        if (col) {
+          ctx.fillStyle = col;
+          ctx.fillRect(c * cellSize, r * cellSize, cellSize, cellSize);
+        }
+
+        if (showGrid) {
+          ctx.strokeStyle = 'rgba(203, 213, 225, 0.45)';
+          ctx.lineWidth = 1;
+          ctx.strokeRect(c * cellSize, r * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+  }
+
+  function getCellCoords(e) {
+    var canvas = $('pixelCanvas');
+    var rect = canvas.getBoundingClientRect();
+    var x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+    var y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+    var c = Math.floor((x / rect.width) * gridSize);
+    var r = Math.floor((y / rect.height) * gridSize);
+    if (r >= 0 && r < gridSize && c >= 0 && c < gridSize) {
+      return { r: r, c: c };
+    }
+    return null;
+  }
+
+  function applyTool(coords) {
+    if (!coords) return;
+    var r = coords.r;
+    var c = coords.c;
+
+    if (currentTool === 'pen') {
+      if (grid[r][c] !== currentColor) {
+        grid[r][c] = currentColor;
+        renderCanvas();
+      }
+    } else if (currentTool === 'eraser') {
+      if (grid[r][c] !== null) {
+        grid[r][c] = null;
+        renderCanvas();
+      }
+    } else if (currentTool === 'fill') {
+      floodFill(r, c, grid[r][c], currentColor);
+      renderCanvas();
+    } else if (currentTool === 'eye') {
+      var picked = grid[r][c];
+      if (picked) {
+        currentColor = picked;
+        $('customColorPicker').value = picked;
+        updatePaletteSelection();
+        setTool('pen');
+        showToast('Color sampled: ' + picked);
+      }
+    }
+  }
+
+  function floodFill(startR, startC, targetCol, replacementCol) {
+    if (targetCol === replacementCol) return;
+    var queue = [[startR, startC]];
+    var visited = {};
+
+    while (queue.length > 0) {
+      var item = queue.pop();
+      var r = item[0], c = item[1];
+      var key = r + ',' + c;
+      if (visited[key]) continue;
+      visited[key] = true;
+
+      if (r < 0 || r >= gridSize || c < 0 || c >= gridSize) continue;
+      if (grid[r][c] === targetCol) {
+        grid[r][c] = replacementCol;
+        queue.push([r + 1, c]);
+        queue.push([r - 1, c]);
+        queue.push([r, c + 1]);
+        queue.push([r, c - 1]);
+      }
+    }
+  }
+
+  function setTool(tool) {
+    currentTool = tool;
+    ['toolPen', 'toolEraser', 'toolFill', 'toolEye'].forEach(function (id) {
+      var btn = $(id);
+      if (btn) btn.classList.remove('active-tool');
+    });
+    var activeBtnId = { pen: 'toolPen', eraser: 'toolEraser', fill: 'toolFill', eye: 'toolEye' }[tool];
+    if ($(activeBtnId)) $(activeBtnId).classList.add('active-tool');
+  }
+
+  function initPalette() {
+    var pGrid = $('paletteGrid');
+    pGrid.innerHTML = '';
+    RETRO_PALETTE.forEach(function (color) {
+      var div = document.createElement('div');
+      div.className = 'swatch' + (color === currentColor ? ' selected' : '');
+      div.style.backgroundColor = color;
+      div.setAttribute('data-color', color);
+      div.addEventListener('click', function () {
+        currentColor = color;
+        $('customColorPicker').value = color;
+        updatePaletteSelection();
+        if (currentTool === 'eraser' || currentTool === 'eye') setTool('pen');
+      });
+      pGrid.appendChild(div);
+    });
+  }
+
+  function updatePaletteSelection() {
+    var swatches = document.querySelectorAll('.swatch');
+    swatches.forEach(function (s) {
+      s.classList.toggle('selected', s.getAttribute('data-color') === currentColor);
+    });
+  }
+
+  // Mouse & Touch events
+  var canvas = $('pixelCanvas');
+
+  function handleStart(e) {
+    e.preventDefault();
+    isDrawing = true;
+    pushUndo();
+    var coords = getCellCoords(e);
+    applyTool(coords);
+  }
+
+  function handleMove(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    var coords = getCellCoords(e);
+    if (coords && (currentTool === 'pen' || currentTool === 'eraser')) {
+      applyTool(coords);
+    }
+  }
+
+  function handleEnd(e) {
+    isDrawing = false;
+  }
+
+  canvas.addEventListener('mousedown', handleStart);
+  canvas.addEventListener('mousemove', handleMove);
+  window.addEventListener('mouseup', handleEnd);
+
+  canvas.addEventListener('touchstart', handleStart, { passive: false });
+  canvas.addEventListener('touchmove', handleMove, { passive: false });
+  window.addEventListener('touchend', handleEnd);
+
+  $('toolPen').addEventListener('click', function () { setTool('pen'); });
+  $('toolEraser').addEventListener('click', function () { setTool('eraser'); });
+  $('toolFill').addEventListener('click', function () { setTool('fill'); });
+  $('toolEye').addEventListener('click', function () { setTool('eye'); });
+
+  $('btnToggleGrid').addEventListener('click', function () {
+    showGrid = !showGrid;
+    renderCanvas();
+    showToast(showGrid ? 'Grid lines enabled' : 'Grid lines hidden');
+  });
+
+  $('btnUndo').addEventListener('click', function () {
+    if (undoStack.length === 0) {
+      showToast('Nothing to undo');
+      return;
+    }
+    grid = JSON.parse(undoStack.pop());
+    renderCanvas();
+    showToast('Undo action');
+  });
+
+  $('btnClear').addEventListener('click', function () {
+    pushUndo();
+    for (var r = 0; r < gridSize; r++) {
+      for (var c = 0; c < gridSize; c++) {
+        grid[r][c] = null;
+      }
+    }
+    renderCanvas();
+    showToast('Canvas cleared');
+  });
+
+  $('customColorPicker').addEventListener('input', function () {
+    currentColor = this.value;
+    updatePaletteSelection();
+    if (currentTool === 'eraser' || currentTool === 'eye') setTool('pen');
+  });
+
+  $('selGridSize').addEventListener('change', function () {
+    var size = parseInt(this.value, 10);
+    initGrid(size);
+    showToast('Canvas resized to ' + size + 'x' + size);
+  });
+
+  // Templates
+  function loadTemplate(pattern) {
+    pushUndo();
+    initGrid(16);
+    $('selGridSize').value = '16';
+    pattern.forEach(function (pt) {
+      if (grid[pt[0]] && grid[pt[0]][pt[1]] !== undefined) {
+        grid[pt[0]][pt[1]] = pt[2];
+      }
+    });
+    renderCanvas();
+  }
+
+  $('tmplHeart').addEventListener('click', function () {
+    var red = '#ff004d';
+    var pts = [
+      [3,4,red],[3,5,red],[3,10,red],[3,11,red],
+      [4,3,red],[4,4,red],[4,5,red],[4,6,red],[4,9,red],[4,10,red],[4,11,red],[4,12,red],
+      [5,2,red],[5,3,red],[5,4,red],[5,5,red],[5,6,red],[5,7,red],[5,8,red],[5,9,red],[5,10,red],[5,11,red],[5,12,red],[5,13,red],
+      [6,2,red],[6,3,red],[6,4,red],[6,5,red],[6,6,red],[6,7,red],[6,8,red],[6,9,red],[6,10,red],[6,11,red],[6,12,red],[6,13,red],
+      [7,3,red],[7,4,red],[7,5,red],[7,6,red],[7,7,red],[7,8,red],[7,9,red],[7,10,red],[7,11,red],[7,12,red],
+      [8,4,red],[8,5,red],[8,6,red],[8,7,red],[8,8,red],[8,9,red],[8,10,red],[8,11,red],
+      [9,5,red],[9,6,red],[9,7,red],[9,8,red],[9,9,red],[9,10,red],
+      [10,6,red],[10,7,red],[10,8,red],[10,9,red],
+      [11,7,red],[11,8,red]
+    ];
+    loadTemplate(pts);
+    showToast('Loaded Heart template');
+  });
+
+  $('tmplInvader').addEventListener('click', function () {
+    var grn = '#00e436';
+    var pts = [
+      [3,4,grn],[3,11,grn],[4,5,grn],[4,10,grn],
+      [5,4,grn],[5,5,grn],[5,6,grn],[5,7,grn],[5,8,grn],[5,9,grn],[5,10,grn],[5,11,grn],
+      [6,3,grn],[6,4,grn],[6,6,grn],[6,7,grn],[6,8,grn],[6,9,grn],[6,11,grn],[6,12,grn],
+      [7,2,grn],[7,3,grn],[7,4,grn],[7,5,grn],[7,6,grn],[7,7,grn],[7,8,grn],[7,9,grn],[7,10,grn],[7,11,grn],[7,12,grn],[7,13,grn],
+      [8,2,grn],[8,4,grn],[8,5,grn],[8,6,grn],[8,7,grn],[8,8,grn],[8,9,grn],[8,10,grn],[8,11,grn],[8,13,grn],
+      [9,2,grn],[9,4,grn],[9,11,grn],[9,13,grn],
+      [10,5,grn],[10,6,grn],[10,9,grn],[10,10,grn]
+    ];
+    loadTemplate(pts);
+    showToast('Loaded Space Invader template');
+  });
+
+  $('tmplMushroom').addEventListener('click', function () {
+    var r = '#ff004d', w = '#ffffff', b = '#000000', s = '#fff1e8';
+    var pts = [
+      [3,5,r],[3,6,r],[3,7,r],[3,8,r],[3,9,r],[3,10,r],
+      [4,3,r],[4,4,r],[4,5,w],[4,6,w],[4,7,r],[4,8,r],[4,9,w],[4,10,w],[4,11,r],[4,12,r],
+      [5,2,r],[5,3,w],[5,4,w],[5,5,w],[5,6,r],[5,7,r],[5,8,r],[5,9,r],[5,10,w],[5,11,w],[5,12,w],[5,13,r],
+      [6,2,r],[6,3,w],[6,4,w],[6,5,r],[6,6,r],[6,7,w],[6,8,w],[6,9,r],[6,10,r],[6,11,w],[6,12,w],[6,13,r],
+      [7,1,b],[7,2,r],[7,3,r],[7,4,r],[7,5,r],[7,6,w],[7,7,w],[7,8,w],[7,9,w],[7,10,r],[7,11,r],[7,12,r],[7,13,r],[7,14,b],
+      [8,4,s],[8,5,s],[8,6,b],[8,7,s],[8,8,s],[8,9,b],[8,10,s],[8,11,s],
+      [9,4,s],[9,5,s],[9,6,b],[9,7,s],[9,8,s],[9,9,b],[9,10,s],[9,11,s],
+      [10,5,s],[10,6,s],[10,7,s],[10,8,s],[10,9,s],[10,10,s]
+    ];
+    loadTemplate(pts);
+    showToast('Loaded Mushroom template');
+  });
+
+  $('tmplSword').addEventListener('click', function () {
+    var bl = '#29adff', br = '#ab5236', y = '#ffec27', gy = '#5f574f';
+    var pts = [
+      [2,12,bl],[2,13,bl],[3,11,bl],[3,12,bl],[4,10,bl],[4,11,bl],
+      [5,9,bl],[5,10,bl],[6,8,bl],[6,9,bl],[7,7,bl],[7,8,bl],
+      [8,5,y],[8,6,y],[8,7,y],[8,8,y],[9,4,y],[9,5,y],[9,8,y],
+      [10,5,br],[10,6,br],[11,6,br],[11,7,br],[12,7,gy],[13,8,gy]
+    ];
+    loadTemplate(pts);
+    showToast('Loaded Pixel Sword template');
+  });
+
+  // Export
+  $('btnDownloadPng').addEventListener('click', function () {
+    var scale = parseInt($('selExportScale').value, 10) || 16;
+    var outW = gridSize * scale;
+    var outH = gridSize * scale;
+
+    var offscreen = document.createElement('canvas');
+    offscreen.width = outW;
+    offscreen.height = outH;
+    var offCtx = offscreen.getContext('2d');
+    offCtx.imageSmoothingEnabled = false;
+
+    for (var r = 0; r < gridSize; r++) {
+      for (var c = 0; c < gridSize; c++) {
+        var col = grid[r][c];
+        if (col) {
+          offCtx.fillStyle = col;
+          offCtx.fillRect(c * scale, r * scale, scale, scale);
+        }
+      }
+    }
+
+    var a = document.createElement('a');
+    a.download = 'pixel_art_' + gridSize + 'x' + gridSize + '_' + scale + 'x.png';
+    a.href = offscreen.toDataURL('image/png');
+    a.click();
+    showToast('Crisp PNG downloaded (' + outW + 'x' + outH + 'px)');
+  });
+
+  $('btnExportJson').addEventListener('click', function () {
+    var payload = { gridSize: gridSize, grid: grid };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'pixel_art_' + gridSize + 'x' + gridSize + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Project JSON exported');
+  });
+
+  $('btnShareApp').addEventListener('click', function () {
+    var shareMsg = '🎨 Free Retro Pixel Art Studio\n👉 ' + TOOL_NAME + ': ' + SITE + '/';
+    if (navigator.share) {
+      navigator.share({ title: TOOL_NAME, text: shareMsg, url: SITE + '/' }).catch(function (e) {
+        if (!e || e.name !== 'AbortError') showToast('Link ready to share!');
+      });
+    } else {
+      showToast('Studio URL: ' + SITE + '/');
+    }
+  });
+
+  initPalette();
+  initGrid(16);
+})();
+</script>
+<!-- LOGIC END -->
 </body>
 </html>

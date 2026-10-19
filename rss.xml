@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</title>
+  <title>Retro Pixel Art Studio</title>
   <link>https://us-pixel-art-studio.enjoy-onepage.com/</link>
-  <description>Create nostalgic 8-bit and 16-bit pixel art, game sprites, and avatars. Export transparent PNGs and animated GIFs for free.</description>
+  <description>Create retro 8-bit pixel art with customizable canvas sizes and PNG export.</description>
   <language>en-us</language>
   <atom:link href="https://us-pixel-art-studio.enjoy-onepage.com/rss.xml" rel="self" type="application/rss+xml" />
-  <lastBuildDate>Tue, 29 Sep 2026 06:02:37 +0000</lastBuildDate>
+  <lastBuildDate>Mon, 19 Oct 2026 01:27:11 +0000</lastBuildDate>
   <item>
-    <title>Disclaimer | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</title>
+    <title>Disclaimer | Retro Pixel Art Studio</title>
     <link>https://us-pixel-art-studio.enjoy-onepage.com/disclaimer.html</link>
     <guid isPermaLink="true">https://us-pixel-art-studio.enjoy-onepage.com/disclaimer.html</guid>
-    <description>Disclaimer | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</description>
-    <pubDate>Sun, 20 Sep 2026 22:12:02 +0900</pubDate>
+    <description>Disclaimer for the Retro Pixel Art Studio.</description>
+    <pubDate>Mon, 19 Oct 2026 01:27:11 +0000</pubDate>
   </item>
   <item>
-    <title>Terms of Service | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</title>
-    <link>https://us-pixel-art-studio.enjoy-onepage.com/terms.html</link>
-    <guid isPermaLink="true">https://us-pixel-art-studio.enjoy-onepage.com/terms.html</guid>
-    <description>Terms of Service | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</description>
-    <pubDate>Sun, 20 Sep 2026 22:12:02 +0900</pubDate>
-  </item>
-  <item>
-    <title>Privacy Policy | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</title>
+    <title>Privacy Policy | Retro Pixel Art Studio</title>
     <link>https://us-pixel-art-studio.enjoy-onepage.com/privacy.html</link>
     <guid isPermaLink="true">https://us-pixel-art-studio.enjoy-onepage.com/privacy.html</guid>
-    <description>Privacy Policy | Retro Pixel Art Studio | 8-bit Canvas &amp; Sprite Maker</description>
-    <pubDate>Sun, 20 Sep 2026 22:12:02 +0900</pubDate>
+    <description>Privacy Policy for the Retro Pixel Art Studio.</description>
+    <pubDate>Mon, 19 Oct 2026 01:27:11 +0000</pubDate>
+  </item>
+  <item>
+    <title>Terms of Service | Retro Pixel Art Studio</title>
+    <link>https://us-pixel-art-studio.enjoy-onepage.com/terms.html</link>
+    <guid isPermaLink="true">https://us-pixel-art-studio.enjoy-onepage.com/terms.html</guid>
+    <description>Terms of Service for the Retro Pixel Art Studio.</description>
+    <pubDate>Mon, 19 Oct 2026 01:27:11 +0000</pubDate>
   </item>
 </channel>
 </rss>
